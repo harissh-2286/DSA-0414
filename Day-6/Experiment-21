@@ -1,0 +1,11 @@
+import numpy as np
+from scipy import stats
+import pandas as pd
+data = pd.read_csv("rare_elements.csv")
+values = data.iloc[:, 0]
+confidence = float(input("Enter confidence level (e.g., 0.95): "))
+mean = np.mean(values)
+sem = stats.sem(values)
+ci = stats.t.interval(confidence, len(values)-1, mean, sem)
+print("Sample Mean:", mean)
+print(f"{int(confidence*100)}% Confidence Interval:", ci)
